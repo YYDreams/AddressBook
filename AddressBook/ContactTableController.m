@@ -85,7 +85,12 @@
     [self.timer invalidate];
     self.timer = nil;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAnimation:) userInfo:nil repeats:YES];
+    // NSDefaultRunLoopMode(默认): 同一时间只能执行一个任务
+    // NSRunLoopCommonModes(公用): 可以分配一定的时间执行其他任务
+    // 作用:修改timer在runLoop中的模式为NSRunLoopCommonModes
+    // 目的:不管主线程在做什么操作,都会分配一定的时间处理定时器
     [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
+ 
     
 }
 
